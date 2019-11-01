@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Button, Card, CardBody, CardGroup, Col, Container, Form, 
+  Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 
 class Login extends Component {
   render() {
@@ -14,7 +16,7 @@ class Login extends Component {
                   <CardBody>
                     <Form>
                       <h1>Login</h1>
-                      <p className="text-muted">Sign In to your account</p>
+                      <p className="text-muted">Sign In to your account check</p>
                       <InputGroup className="mb-3">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
@@ -33,7 +35,9 @@ class Login extends Component {
                       </InputGroup>
                       <Row>
                         <Col xs="6">
-                          <Button color="primary" className="px-4">Login</Button>
+                          <Link to="/dashboard">
+                            <Button color="primary" className="px-4">Login</Button>
+                          </Link>
                         </Col>
                         <Col xs="6" className="text-right">
                           <Button color="link" className="px-0">Forgot password?</Button>
