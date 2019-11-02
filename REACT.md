@@ -1,7 +1,6 @@
-# CoreUI React version
+# Admin React version
 
-## Intro 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
+## Intro
 
 It uses Sass (with .scss). The styles are loaded at the template level with `node-sass-chokidar` css preprocessor
 
