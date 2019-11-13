@@ -1,4 +1,5 @@
 import React, { Component, Suspense } from 'react';
+import { connect } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
@@ -89,4 +90,12 @@ class DefaultLayout extends Component {
   }
 }
 
-export default DefaultLayout;
+function mapState(state) {
+  const { loggingIn } = state.authentication;
+  return { loggingIn };
+}
+
+const mapDispatchToProps = {
+  
+}
+export default connect(mapState, mapDispatchToProps)(DefaultLayout);

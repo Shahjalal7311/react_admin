@@ -1,45 +1,31 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Badge, Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 
-import usersData from './UsersData'
-
-function UserRow(props) {
-  const user = props.user
-  const userLink = `/users/${user.id}`
-
-  const getBadge = (status) => {
-    return status === 'Active' ? 'success' :
-      status === 'Inactive' ? 'secondary' :
-        status === 'Pending' ? 'warning' :
-          status === 'Banned' ? 'danger' :
-            'primary'
-  }
-
-  return (
-    <tr key={user.id.toString()}>
-      <th scope="row"><Link to={userLink}>{user.id}</Link></th>
-      <td><Link to={userLink}>{user.name}</Link></td>
-      <td>{user.registered}</td>
-      <td>{user.role}</td>
-      <td><Link to={userLink}><Badge color={getBadge(user.status)}>{user.status}</Badge></Link></td>
-    </tr>
-  )
-}
+import { userActions } from '../../_actions'; 
 
 class Users extends Component {
 
+  componentDidMount() {
+      this.props.getUsers();
+  }
+  handleDeleteUser(id) {
+      return (e) => this.props.deleteUser(id);
+  }
+  
   render() {
-
-    const userList = usersData.filter((user) => user.id < 10)
-
+    const { users } = this.props;
     return (
       <div className="animated fadeIn">
         <Row>
-          <Col xl={6}>
+          <Col xl={12}>
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i> Users <small className="text-muted">example</small>
+                <i className="fa fa-align-justify"></i> Users <small className="text-muted">List</small>
+                <Link to="/registration">
+                  <i className="fa fa-plus pull-right"> <small className="text-muted">Add</small></i>
+                </Link>
               </CardHeader>
               <CardBody>
                 <Table responsive hover>
@@ -47,16 +33,27 @@ class Users extends Component {
                     <tr>
                       <th scope="col">id</th>
                       <th scope="col">name</th>
-                      <th scope="col">registered</th>
-                      <th scope="col">role</th>
-                      <th scope="col">status</th>
+                      <th scope="col">User Name</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Action</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {userList.map((user, index) =>
-                      <UserRow key={index} user={user}/>
-                    )}
-                  </tbody>
+                    {users.items &&
+                    <tbody>
+                        {users.items.map((user, index) =>
+                        // const link = '/user/'user.id;
+                          <tr key={user.id.toString()}>
+                            <th scope="row"><Link to="">{user.id}</Link></th>
+                            <td><Link to="">{user.username}</Link></td>
+                            <td>{user.email}</td>
+                            <td>
+                              Active
+                            </td>
+                            <td><Link to="">Edit</Link></td>
+                          </tr>
+                        )}
+                      </tbody>
+                    }  
                 </Table>
               </CardBody>
             </Card>
@@ -67,4 +64,15 @@ class Users extends Component {
   }
 }
 
-export default Users;
+function mapState(state) {
+  const { users, authentication } = state;
+  const { user } = authentication;
+  return { user, users };
+}
+
+const mapDispatchToProps = {
+  getUsers: userActions.getAll,
+  deleteUser: userActions.delete
+}
+
+export default connect(mapState, mapDispatchToProps)(Users);

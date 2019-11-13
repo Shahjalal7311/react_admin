@@ -3,13 +3,21 @@ import 'react-app-polyfill/stable';
 // import 'react-app-polyfill/ie11'; // For IE 11 support
 import './polyfill'
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './index.css';
+import { store } from './_helpers';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
-ReactDOM.render(<App />, document.getElementById('root'));
+// setup fake backend
+import { configureFakeBackend } from './_helpers';
+configureFakeBackend();
+render(
+  <Provider store={store}>
+      <App />
+  </Provider>, 
+  document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

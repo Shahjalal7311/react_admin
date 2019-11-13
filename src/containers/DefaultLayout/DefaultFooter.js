@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 const propTypes = {
@@ -12,11 +13,10 @@ class DefaultFooter extends Component {
 
     // eslint-disable-next-line
     const { children, ...attributes } = this.props;
-
     return (
       <React.Fragment>
-        <span><a href="www.google.com">React</a> &copy; 2019 creativeLabs.</span>
-        <span className="ml-auto">Powered by <a href="www.google.com">admin</a></span>
+        <span><a href="#">React</a> &copy; 2019 web.</span>
+        <span className="ml-auto">Powered by <a href="#">admin</a></span>
       </React.Fragment>
     );
   }
@@ -25,4 +25,12 @@ class DefaultFooter extends Component {
 DefaultFooter.propTypes = propTypes;
 DefaultFooter.defaultProps = defaultProps;
 
-export default DefaultFooter;
+function mapState(state) {
+  const { loggingIn } = state.authentication;
+  return { loggingIn };
+}
+
+const mapDispatchToProps = {
+  
+}
+export default connect(mapState, mapDispatchToProps)(DefaultFooter);

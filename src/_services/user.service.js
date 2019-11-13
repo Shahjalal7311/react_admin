@@ -1,5 +1,8 @@
 import { baseService } from './config/base.service';
+import { userConstants } from '../_constants';
 import { authHeader } from '../_helpers';
+import { configureFakeBackend } from '../_helpers';
+configureFakeBackend();
 
 export const userService = {
     login,
@@ -11,7 +14,7 @@ export const userService = {
     delete: _delete
 };
 
-let apiUrl = baseService();
+let apiUrl = 'http://localhost:3000/';
 function login(username, password) {
     const requestOptions = {
         method: 'POST',
@@ -53,13 +56,13 @@ function getById(id) {
 }
 
 function register(user) {
+    // console.log(user);
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
-    localStorage.setItem('user', JSON.stringify(user));
-    // return fetch(`/users/register`, requestOptions).then(handleResponse);
+    return fetch(`${apiUrl}/users/register`, requestOptions).then(handleResponse);
 }
 
 function update(user) {

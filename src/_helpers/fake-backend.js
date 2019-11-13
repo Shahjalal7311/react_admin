@@ -3,6 +3,7 @@ let users = JSON.parse(localStorage.getItem('users')) || [];
     
 export function configureFakeBackend() {
     let realFetch = window.fetch;
+    let url = 'http://localhost:3000/';
     window.fetch = function (url, opts) {
         return new Promise((resolve, reject) => {
             // wrap in timeout to simulate server api call
@@ -15,7 +16,7 @@ export function configureFakeBackend() {
 
                     // find if any user matches login credentials
                     let filteredUsers = users.filter(user => {
-                        return user.username === params.username && user.password === params.password;
+                        return user.email === params.username && user.password === params.password;
                     });
 
                     if (filteredUsers.length) {
@@ -23,9 +24,7 @@ export function configureFakeBackend() {
                         let user = filteredUsers[0];
                         let responseJson = {
                             id: user.id,
-                            username: user.username,
-                            firstName: user.firstName,
-                            lastName: user.lastName,
+                            username: user.email,
                             token: 'fake-jwt-token'
                         };
                         resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(responseJson)) });
@@ -76,7 +75,7 @@ export function configureFakeBackend() {
                     let newUser = JSON.parse(opts.body);
 
                     // validation
-                    let duplicateUser = users.filter(user => { return user.username === newUser.username; }).length;
+                    let duplicateUser = users.filter(user => { return user.username === newUser.email; }).length;
                     if (duplicateUser) {
                         reject('Username "' + newUser.username + '" is already taken');
                         return;

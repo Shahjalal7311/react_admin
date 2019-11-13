@@ -27,14 +27,14 @@ class Login extends Component {
   }
 
   handleSubmit(e) {
-      e.preventDefault();
-      this.setState({ submitted: true });
-      const { username, password } = this.state;
-      if (username && password) {
-        // console.log(username,'console');
-        userActions.login(username, password);
-      }
-  }
+    e.preventDefault();
+
+    this.setState({ submitted: true });
+    const { username, password } = this.state;
+    if (username && password) {
+        this.props.login(username, password);
+    }
+}
 
   render() {
     const { loggingIn } = this.props;
@@ -86,12 +86,11 @@ class Login extends Component {
                 <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
                   <CardBody className="text-center">
                     <div>
-                      <h2>Sign up</h2>
                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
                         labore et dolore magna aliqua.</p>
-                      <Link to="/register">
+                      {/* <Link to="/register">
                         <Button color="primary" className="mt-3" active tabIndex={-1}>Register Now!</Button>
-                      </Link>
+                      </Link> */}
                     </div>
                   </CardBody>
                 </Card>
@@ -103,16 +102,15 @@ class Login extends Component {
     );
   }
 }
+
 function mapState(state) {
   const { loggingIn } = state.authentication;
   return { loggingIn };
 }
 
-const actionCreators = {
+const mapDispatchToProps = {
   login: userActions.login,
   logout: userActions.logout
 };
 
-export default Login;
-const connectedLoginPage = connect(mapState, actionCreators)(Login);
-export { connectedLoginPage as Login };
+export default connect(mapState, mapDispatchToProps)(Login);

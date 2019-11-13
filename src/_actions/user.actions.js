@@ -12,25 +12,18 @@ export const userActions = {
 };
 
 function login(username, password) {
-    console.log(username);
-        // userService.login(username, password)
-        // .then(
-        //     user => { 
-        //         success(user);
-        //     },
-        //     error => {
-        //         dispatch(failure(error.toString()));
-        //         dispatch(alertActions.error(error.toString()));
-        //     }
-        // );
+    
     return dispatch => {
+        
         dispatch(request({ username }));
         
         userService.login(username, password)
             .then(
                 user => { 
                     dispatch(success(user));
-                    history.push('/');
+                    // this.props.history.push('#/dashboard');
+                    history.push('/dashboard');
+                    // history.push('#/dashboard');
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -46,16 +39,27 @@ function login(username, password) {
 
 function logout() {
     userService.logout();
+    history.push('/login');
     return { type: userConstants.LOGOUT };
 }
 
 function register(user) {
-    // return dispatch => {
-        // dispatch(request(user));
-        console.log(user);
-        userService.register(user);
-        history.push('/login');
-    // };
+    return dispatch => {
+        dispatch(request(user));
+
+        userService.register(user)
+            .then(
+                user => { 
+                    dispatch(success());
+                    history.push('/users');
+                    dispatch(alertActions.success('Registration successful'));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
 
     function request(user) { return { type: userConstants.REGISTER_REQUEST, user } }
     function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
