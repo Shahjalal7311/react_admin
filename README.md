@@ -1,23 +1,10 @@
-[![@coreui coreui](https://img.shields.io/badge/@coreui%20-coreui-lightgrey.svg?style=flat-square)](https://github.com/coreui/coreui)
-[![npm package][npm-coreui-badge]][npm-coreui]
-[![NPM downloads][npm-coreui-download]][npm-coreui]  
-[![@coreui react](https://img.shields.io/badge/@coreui%20-react-lightgrey.svg?style=flat-square)](https://github.com/coreui/react)
-[![npm package][npm-coreui-react-badge]][npm-coreui-react]
-[![NPM downloads][npm-coreui-react-download]][npm-coreui-react]
 
-[npm-coreui]: https://www.npmjs.com/package/@coreui/coreui
-[npm-coreui-badge]: https://img.shields.io/npm/v/@coreui/coreui.png?style=flat-square
-[npm-coreui-download]: https://img.shields.io/npm/dm/@coreui/coreui.svg?style=flat-square
-[npm-coreui-react]: https://www.npmjs.com/package/@coreui/react
-[npm-coreui-react-badge]: https://img.shields.io/npm/v/@coreui/react.png?style=flat-square
-[npm-coreui-react-download]: https://img.shields.io/npm/dm/@coreui/react.svg?style=flat-square
 
 
 ## Table of Contents
 
 * [Versions](#versions)
 * [CoreUI Pro](#coreui-pro)
-* [Admin Templates built on top of CoreUI Pro](#admin-templates-built-on-top-of-coreui-pro)
 * [Installation](#installation)
 * [Usage](#usage)
 * [What's included](#whats-included)
@@ -28,8 +15,26 @@
 * [Community](#community)
 * [Community Projects](#community-projects)
 * [License](#license)
-* [Support CoreUI Development](#support-coreui-development)
+* [Support Development](#support-development)
 
+
+## Versions
+
+## Installation
+
+``` bash
+# clone the repo
+$ git clone 
+
+# go into app's directory
+$ cd my-project
+
+# install app's dependencies
+$ npm install
+```
+
+## Create React App
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
 
 ### Basic usage
 
@@ -71,3 +76,4 @@ CoreUI-React#v2.0.0
 │
 └── package.json
 ```
+
