@@ -1,25 +1,3 @@
-
-
-
-## Table of Contents
-
-* [Versions](#versions)
-* [CoreUI Pro](#coreui-pro)
-* [Installation](#installation)
-* [Usage](#usage)
-* [What's included](#whats-included)
-* [Documentation](#documentation)
-* [Contributing](#contributing)
-* [Versioning](#versioning)
-* [Creators](#creators)
-* [Community](#community)
-* [Community Projects](#community-projects)
-* [License](#license)
-* [Support Development](#support-development)
-
-
-## Versions
-
 ## Installation
 
 ``` bash

@@ -1,14 +1,7 @@
 # Admin React version
 
-## Intro
-
-It uses Sass (with .scss). The styles are loaded at the template level with `node-sass-chokidar` css preprocessor
-
-Dependencies are handled by **npm**.
-
 ## Directories
 ```
-CoreUI-React#v2.0.0
 ├── public/      (static files)
 │   ├── assets/    (assets)
 │   ├── favicon.ico  
