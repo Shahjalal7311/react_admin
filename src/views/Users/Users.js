@@ -23,7 +23,7 @@ class Users extends Component {
             <Card>
               <CardHeader>
                 <i className="fa fa-align-justify"></i> Users <small className="text-muted">List</small>
-                <Link to="/registration">
+                <Link to="/user-add">
                   <i className="fa fa-plus pull-right"> <small className="text-muted">Add</small></i>
                 </Link>
               </CardHeader>

@@ -1,5 +1,7 @@
 // array in local storage for registered users
+import { history } from '../_helpers';
 let users = JSON.parse(localStorage.getItem('users')) || [];
+let user = JSON.parse(localStorage.getItem('user'));
     
 export function configureFakeBackend() {
     let realFetch = window.fetch;
@@ -8,7 +10,24 @@ export function configureFakeBackend() {
         return new Promise((resolve, reject) => {
             // wrap in timeout to simulate server api call
             setTimeout(() => {
+                // authenticate
+                if (url.endsWith('/checkauthenticate')) {
+                    if (user) {
+                        let responseJson = {
+                            id: user.id,
+                            username: user.email,
+                            token: 'fake-jwt-token'
+                        };
+                        resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(responseJson)) });
+                        history.push('/Dashboard');
+                    } else {
+                        // else return error
+                        reject('You are not autherised to acess');
+                        history.push('/login');
+                    }
 
+                    return;
+                }
                 // authenticate
                 if (url.endsWith('/users/authenticate') && opts.method === 'POST') {
                     // get parameters from post request
@@ -28,6 +47,7 @@ export function configureFakeBackend() {
                             token: 'fake-jwt-token'
                         };
                         resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(responseJson)) });
+                        history.push('/Dashboard');
                     } else {
                         // else return error
                         reject('Username or password is incorrect');
@@ -44,6 +64,7 @@ export function configureFakeBackend() {
                     } else {
                         // return 401 not authorised if token is null or invalid
                         reject('Unauthorised');
+                        history.push('/Page404');
                     }
 
                     return;
@@ -64,6 +85,7 @@ export function configureFakeBackend() {
                     } else {
                         // return 401 not authorised if token is null or invalid
                         reject('Unauthorised');
+                        history.push('/Page404');
                     }
 
                     return;
@@ -114,6 +136,7 @@ export function configureFakeBackend() {
                     } else {
                         // return 401 not authorised if token is null or invalid
                         reject('Unauthorised');
+                        history.push('/Page404');
                     }
 
                     return;

@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { HashRouter, Router, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 // import { renderRoutes } from 'react-router-config';
 import './App.scss';
 
 import { history } from './_helpers';
 import { alertActions } from './_actions';
 import { PrivateRoute } from './_components';
-
+import { userActions } from './_actions'; 
+import { ConnectedAuthRoute } from './guards';
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 
 // Containers
@@ -18,6 +20,11 @@ const Page404 = React.lazy(() => import('./views/Pages/Page404'));
 const Page500 = React.lazy(() => import('./views/Pages/Page500'));
 
 class App extends Component {
+
+  //check authentication
+  componentWillMount () {
+    userActions.checkAuth()
+  }
 
   render() {
     return (
@@ -37,4 +44,13 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapState(state) {
+  const { loggingIn } = state.authentication;
+  return { loggingIn };
+}
+
+const mapDispatchToProps = {
+  
+};
+
+export default connect(mapState, mapDispatchToProps)(App);

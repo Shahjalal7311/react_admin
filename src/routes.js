@@ -11,7 +11,7 @@ const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/logout', name: 'Dashboard', component: LogOut },
-  { path: '/registration', name: 'Dashboard', component: Register },
+  { path: '/user-add', name: 'Dashboard', component: Register },
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
 ];

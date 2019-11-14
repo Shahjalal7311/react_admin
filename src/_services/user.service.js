@@ -11,10 +11,12 @@ export const userService = {
     getAll,
     getById,
     update,
+    checkAuth,
     delete: _delete
 };
 
 let apiUrl = 'http://localhost:3000/';
+
 function login(username, password) {
     const requestOptions = {
         method: 'POST',
@@ -24,9 +26,21 @@ function login(username, password) {
     return fetch(`/users/authenticate`, requestOptions)
         .then(handleResponse)
         .then(user => {
-            console.log('test');
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('user', JSON.stringify(user));
+            return user;
+        });
+}
+
+function checkAuth() {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+    };
+    return fetch(`/checkauthenticate`, requestOptions)
+        .then(handleResponse)
+        .then(user => {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            localStorage.getItem('user', JSON.stringify(user));
 
             return user;
         });

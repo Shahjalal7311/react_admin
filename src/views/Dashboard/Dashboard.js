@@ -315,7 +315,7 @@ class Dashboard extends Component {
 }
 
 function mapState(state) {
-  const { loggingIn } = state.authentication;
+  const { loggingIn , authentication} = state;
   return { loggingIn };
 }
 
