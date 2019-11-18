@@ -7,6 +7,7 @@ var properties = require('./backend/config/properties');
 var db = require('./backend/config/db');
 //hero routes
 var usersRoutes = require('./backend/api/users/users.routes');
+var articlasRoutes = require('./backend/api/artical/artical.routes');
 var app = express();
 
 //configure bodyparser
@@ -39,6 +40,7 @@ app.use(function(req, res, next) {
 app.use('/api',router);
 //call heros routing
 usersRoutes(router);
+articlasRoutes(router);
 
 // intialise server
 app.listen(properties.PORT, (req, res) => {

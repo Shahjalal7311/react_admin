@@ -1,4 +1,4 @@
 export function baseService() {
-  let apiUrl = 'http://localhost:3001/';
+  let apiUrl = 'http://localhost:4000/api';
   return apiUrl;
 }

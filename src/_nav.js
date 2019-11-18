@@ -6,6 +6,11 @@ export default {
       icon: 'icon-speedometer'
     },
     {
+      name: 'Artical',
+      url: '/artical',
+      icon: 'icon-list'
+    },
+    {
       name: 'User',
       url: '/users',
       icon: 'icon-user'

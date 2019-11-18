@@ -8,7 +8,7 @@ exports.createUser = function (req, res, next) {
       password: req.body.password
     };
     
-    Users.create(user, function(err, user) {
+    Users.usercreate(user, function(err, user) {
         if(err) {
             res.json({
                 error : err
@@ -21,7 +21,7 @@ exports.createUser = function (req, res, next) {
 }
 
 exports.getUsers = function(req, res, next) {
-    Users.get({}, function(err, users) {
+    Users.usersget({}, function(err, users) {
         if(err) {
             res.json({
                 error: err

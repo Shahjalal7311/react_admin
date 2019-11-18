@@ -1,14 +1,12 @@
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
-var usersSchema = require('./users.model');
-var BCRYPT_SALT_ROUNDS = 12;
-usersSchema.statics = {
-    usercreate : function(data, cb) {
-        var user = new this(data);
-        user.save(cb);
+var articlasSchema = require('./artical.model');
+articlasSchema.statics = {
+    articalcreate : function(data, cb) {
+        var articla = new this(data);
+        articla.save(cb);
     },
 
-    usersget: function(query, cb) {
+    get: function(query, cb) {
         this.find(query, cb);
     },
 
@@ -25,5 +23,5 @@ usersSchema.statics = {
     }
 }
 
-var usersModel = mongoose.model('Users', usersSchema);
-module.exports = usersModel;
+var articlasModel = mongoose.model('Articlas', articlasSchema);
+module.exports = articlasModel;
