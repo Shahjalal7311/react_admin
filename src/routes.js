@@ -4,6 +4,8 @@ const LogOut = React.lazy(()=> import('./views/LogOut'));
 const Breadcrumbs = React.lazy(() => import('./views/Base/Breadcrumbs'));
 const Dashboard = React.lazy(() => import('./views/Dashboard'));
 const Artical = React.lazy(() => import('./views/Artical/Articals'));
+const ArticalAdd = React.lazy(()=>import('./views/Artical/ArticalAdd'));
+const ArticalEdit = React.lazy(()=> import('./views/Artical/ArticalEdit'));
 const Register = React.lazy(() => import('./views/Register'));
 const Users = React.lazy(() => import('./views/Users/Users'));
 const User = React.lazy(() => import('./views/Users/User'));
@@ -13,9 +15,11 @@ const routes = [
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/logout', name: 'Dashboard', component: LogOut },
   { path: '/artical', name: 'Artical', component: Artical },
+  { path: '/atical-add', name: 'ArticalAdd', component: ArticalAdd },
+  { path: '/artical-edit/:id', name: 'Artical Edit', component: ArticalEdit },
   { path: '/user-add', name: 'Dashboard', component: Register },
-  { path: '/users', exact: true,  name: 'Users', component: Users },
-  { path: '/users/:id', exact: true, name: 'User Details', component: User },
+  { path: '/users', name: 'Users', component: Users },
+  { path: '/users/:id', name: 'User Details', component: User },
 ];
 
 export default routes;

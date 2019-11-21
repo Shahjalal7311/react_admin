@@ -10,8 +10,8 @@ articlasSchema.statics = {
         this.find(query, cb);
     },
 
-    getByName: function(query, cb) {
-        this.find(query, cb);
+    getByid: function(query, cb) {
+        this.findOne(query, cb);
     },
 
     update: function(query, updateData, cb) {

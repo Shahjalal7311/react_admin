@@ -7,8 +7,9 @@ import './App.scss';
 import { history } from './_helpers';
 import { alertActions } from './_actions';
 import { PrivateRoute } from './_components';
-import { userActions } from './_actions'; 
-import { ConnectedAuthRoute } from './guards';
+import { userActions } from './_actions';
+import Auth from './Auth/Auth';
+import { emptyStatement } from '@babel/types';
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 
 // Containers
@@ -20,10 +21,12 @@ const Page404 = React.lazy(() => import('./views/Pages/Page404'));
 const Page500 = React.lazy(() => import('./views/Pages/Page500'));
 
 class App extends Component {
-
   //check authentication
-  componentWillMount () {
-    userActions.checkAuth()
+  componentDidMount () {
+    let user = JSON.parse(localStorage.getItem('user'));
+    if(user ==null){
+      history.push('/login');
+    }
   }
 
   render() {

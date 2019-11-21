@@ -2,6 +2,12 @@ import { articalConstants } from '../_constants';
 
 export function articals(state = {}, action) {
   switch (action.type) {
+    case articalConstants.CREATE_REQUEST:
+      return { registering: true };
+    case articalConstants.CREATE_SUCCESS:
+      return {};
+    case articalConstants.CREATE_FAILURE:
+      return {};
     case articalConstants.GETALL_REQUEST:
       return {
         loading: true
@@ -14,6 +20,18 @@ export function articals(state = {}, action) {
       return { 
         error: action.error
       };
+    case articalConstants.GET_REQUEST:
+      return {
+        loading: true
+      };
+    case articalConstants.GET_SUCCESS:
+      return {
+        item: action.artical
+      };
+    case articalConstants.GET_FAILURE:
+      return { 
+        error: action.error
+      };  
     case articalConstants.DELETE_REQUEST:
       // add 'deleting:true' property to user being deleted
       return {

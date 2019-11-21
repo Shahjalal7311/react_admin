@@ -36,14 +36,14 @@ exports.getArticals = function(req, res, next) {
 }
 
 exports.getArtical = function(req, res, next) {
-    Articlas.get({id: req.params.id}, function(err, articals) {
+    Articlas.getByid({"_id": req.params.id}, function(err, artical) {
         if(err) {
             res.json({
                 error: err
             })
         }
         res.json({
-            articals: articals
+            artical: artical
         })
     })
 }

@@ -8,32 +8,17 @@ import { articalActions } from '../../_actions';
 class Articals extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      articals: []
-    };
   }
   componentDidMount() {
     this.props.getArticals();
-    const url = baseService() + '/articalsget';
-    fetch(url)
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        this.setState({
-          articals: response.articals,
-        })
-      })
-      .catch((error) => {
-        this.setState({
-          error: true
-        })
-      });
+  }
+
+  handleDeleteUser(id) {
+    return (e) => this.props.deleteArtical(id);
   }
   
   render() {
-    const { articals } = this.state;
-    const currentarticals = articals;
+    const { articals } = this.props;
     return (
       <div className="animated fadeIn">
         <Row>
@@ -41,11 +26,13 @@ class Articals extends Component {
             <Card>
               <CardHeader>
                 <i className="fa fa-align-justify"></i> Artical <small className="text-muted">List</small>
-                <Link to="">
+                <Link to="/atical-add">
                   <i className="fa fa-plus pull-right"> <small className="text-muted">Add</small></i>
                 </Link>
               </CardHeader>
               <CardBody>
+                {articals.loading && <em>Loading articals...</em>}
+                {articals.error && <span className="text-danger">ERROR: {articals.error}</span>}
                 <Table responsive hover>
                   <thead>
                     <tr>
@@ -55,15 +42,20 @@ class Articals extends Component {
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
-                  {currentarticals &&
+                  {articals.items &&
                     <tbody>
-                        {currentarticals.map((artical, index) =>
-                        // const link = '/user/'user.id;
+                        {articals.items.map((artical, index) =>
+                          // const editLink = '/artical-edit/'+ artical.id;
                           <tr key={artical._id}>
                             <th scope="row">{artical._id}</th>
                             <td>{artical.title}</td>
                             <td>{artical.slug}</td>
-                            <td><Link to="">Edit</Link></td>
+                            <td>
+                              <Link href="#" to={`artical-edit/${artical._id}/`}><i className="cui-pencil icons"></i></Link>
+                              <a onClick={this.handleDeleteUser(artical._id)} style={{ cursor: 'pointer', color:'#20a8d8' }}>
+                                <i className="cui-trash icons"></i>
+                              </a>
+                            </td>
                           </tr>
                         )}
                       </tbody>
@@ -84,7 +76,8 @@ function mapState(state) {
 }
 
 const mapDispatchToProps = {
-  getArticals: articalActions.getAll
+  getArticals: articalActions.getAll,
+  deleteArtical: articalActions.delete
 }
 
 export default connect(mapState, mapDispatchToProps)(Articals);
