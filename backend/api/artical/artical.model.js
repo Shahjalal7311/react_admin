@@ -31,6 +31,11 @@ var articlasSchema = new Schema({
             type: String,
             unique : false,
             required : false
+        },
+        order :{
+            type: String,
+            unique : false,
+            required : false
         }
     }, 
     {

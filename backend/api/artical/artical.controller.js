@@ -7,7 +7,8 @@ exports.createArtical = function (req, res, next) {
       description: req.body.description,
       metaTitle: req.body.metaTitle,
       metaKeyword: req.body.metaKeyword,
-      metaDescription: req.body.metaDescription
+      metaDescription: req.body.metaDescription,
+      order: req.body.order
     };
     
     Articlas.articalcreate(artical, function(err, artical) {
@@ -55,7 +56,8 @@ exports.updateArtical = function(req, res, next) {
         description: req.body.description,
         metaTitle: req.body.metaTitle,
         metaKeyword: req.body.metaKeyword,
-        metaDescription: req.body.metaDescription
+        metaDescription: req.body.metaDescription,
+        order: req.body.order
       };
     Articlas.update({_id: req.params.id}, artical, function(err, artical) {
         if(err) {

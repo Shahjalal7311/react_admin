@@ -37,8 +37,6 @@ function getAll() {
     };
     // console.log(id,'idddd');
     const data = await fetch(`${apiUrl}/singlearticalget/${id}`, requestOptions).then(handleResponseSing);
-    // const data12 = JSON.stringify(data.artical);
-    // console.log(,'article data is here');
     return data.artical;
 }
 
@@ -48,8 +46,7 @@ function update(artical) {
         headers: { ...authHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify(artical)
     };
-
-    return fetch(`${apiUrl}/singlearticalupdate/${artical.id}`, requestOptions).then(handleResponse);;
+    return fetch(`${apiUrl}/singlearticalupdate/${artical._id}`, requestOptions).then(handleResponse);
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript

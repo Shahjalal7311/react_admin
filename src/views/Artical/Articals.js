@@ -39,6 +39,7 @@ class Articals extends Component {
                       <th scope="col">ID#</th>
                       <th scope="col">Title</th>
                       <th scope="col">Slug</th>
+                      <th scope="col">Order</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
@@ -50,6 +51,7 @@ class Articals extends Component {
                             <th scope="row">{artical._id}</th>
                             <td>{artical.title}</td>
                             <td>{artical.slug}</td>
+                            <td>{artical.order}</td>
                             <td>
                               <Link href="#" to={`artical-edit/${artical._id}/`}><i className="cui-pencil icons"></i></Link>
                               <a onClick={this.handleDeleteUser(artical._id)} style={{ cursor: 'pointer', color:'#20a8d8' }}>

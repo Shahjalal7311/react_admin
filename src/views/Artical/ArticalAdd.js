@@ -18,7 +18,7 @@ class ArticalAdd extends Component {
           description: '',
           metaTitle: '',
           metaKeyword: '',
-          
+          order: '',
         },
           submitted: false
       };
@@ -73,6 +73,9 @@ class ArticalAdd extends Component {
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <Input name="metaDescription" type="text" placeholder="metaDescription" autoComplete="metaDescription" onChange={this.handleChange}/>
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                      <Input name="order" type="text" placeholder="order" autoComplete="order" onChange={this.handleChange}/>
                     </InputGroup>
                     <Button color="success">Submit</Button>
                   </Form>

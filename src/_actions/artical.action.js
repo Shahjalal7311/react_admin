@@ -4,8 +4,9 @@ import { alertActions } from './';
 import { history } from '../_helpers';
 
 export const articalActions = {
-		create,
-		getById,
+    create,
+    update,
+    getById,
     getAll,
     delete: _delete
 };
@@ -60,6 +61,22 @@ function getById(id) {
     function request(id) { return { type: articalConstants.GET_REQUEST, id } }
     function success(artical) { return { type: articalConstants.GET_SUCCESS, artical } }
     function failure(id, error) { return { type: articalConstants.GET_FAILURE, id, error } }
+}
+
+function update(artical){
+    return dispatch => {
+        dispatch(request(artical));
+
+        articalService.update(artical).then(
+			(artical) => {
+                dispatch(success(artical));
+                history.push('/artical');
+            });
+    };
+
+    function request(artical) { return { type: articalConstants.UPDATE_REQUEST, artical } }
+    function success(artical) { return { type: articalConstants.UPDATE_SUCCESS, artical } }
+    function failure(artical, error) { return { type: articalConstants.UPDATE_FAILURE, artical, error } }
 }
 // prefixed function name with underscore because delete is a reserved word in javascript
 function _delete(id) {
