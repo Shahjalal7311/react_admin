@@ -1,7 +1,5 @@
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
 var usersSchema = require('./users.model');
-var BCRYPT_SALT_ROUNDS = 12;
 usersSchema.statics = {
     usercreate : function(data, cb) {
         var user = new this(data);

@@ -28,6 +28,8 @@ class Users extends Component {
                 </Link>
               </CardHeader>
               <CardBody>
+                {users.loading && <em>Loading Users...</em>}
+                {users.error && <span className="text-danger">ERROR: {users.error}</span>}
                 <Table responsive hover>
                   <thead>
                     <tr>
@@ -42,14 +44,19 @@ class Users extends Component {
                     <tbody>
                         {users.items.map((user, index) =>
                         // const link = '/user/'user.id;
-                          <tr key={user.id.toString()}>
-                            <th scope="row"><Link to="">{user.id}</Link></th>
-                            <td><Link to="">{user.username}</Link></td>
+                          <tr key={user._id.toString()}>
+                            <th scope="row">{user._id}</th>
+                            <td>{user.username}</td>
                             <td>{user.email}</td>
                             <td>
                               Active
                             </td>
-                            <td><Link to="">Edit</Link></td>
+                            <td>
+                              <Link href="#" to={`users-edit/${user._id}/`}><i className="cui-pencil icons"></i></Link>
+                              <a onClick={this.handleDeleteUser(user._id)} style={{ cursor: 'pointer', color:'#20a8d8' }}>
+                                <i className="cui-trash icons"></i>
+                              </a>
+                            </td>
                           </tr>
                         )}
                       </tbody>

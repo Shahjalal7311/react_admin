@@ -8,6 +8,8 @@ export const userActions = {
     logout,
     register,
     getAll,
+    getById,
+    updateUser,
     checkAuth,
     delete: _delete
 };
@@ -87,6 +89,36 @@ function getAll() {
     function failure(error) { return { type: userConstants.GETALL_FAILURE, error } }
 }
 
+function getById(id) {
+    return dispatch => {
+        dispatch(request(id));
+
+        userService.getById(id).then(
+			(user) => {
+                dispatch(success(user));
+            });
+    };
+
+    function request(id) { return { type: userConstants.GET_REQUEST, id } }
+    function success(user) { return { type: userConstants.GET_SUCCESS, user } }
+    function failure(id, error) { return { type: userConstants.GET_FAILURE, id, error } }
+}
+
+function updateUser(user){
+    return dispatch => {
+        dispatch(request(user));
+
+        userService.updateUser(user).then(
+			(user) => {
+                dispatch(success(user));
+                history.push('/users');
+            });
+    };
+
+    function request(user) { return { type: userConstants.UPDATE_REQUEST, user } }
+    function success(user) { return { type: userConstants.UPDATE_SUCCESS, user } }
+    function failure(user, error) { return { type: userConstants.UPDATE_FAILURE, user, error } }
+}
 // prefixed function name with underscore because delete is a reserved word in javascript
 function _delete(id) {
     return dispatch => {
@@ -94,8 +126,15 @@ function _delete(id) {
 
         userService.delete(id)
             .then(
-                user => dispatch(success(id)),
-                error => dispatch(failure(id, error.toString()))
+                user => { 
+                    dispatch(success(id));
+                    window.location.reload();
+                    dispatch(alertActions.success('User delete successful'));
+                },
+                error => {
+                        dispatch(failure(id, error.toString()));
+                        dispatch(alertActions.error(id, error.toString()));
+                }
             );
     };
 
