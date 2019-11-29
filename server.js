@@ -8,6 +8,7 @@ var db = require('./backend/config/db');
 //hero routes
 var usersRoutes = require('./backend/api/users/users.routes');
 var articlasRoutes = require('./backend/api/artical/artical.routes');
+// var authLogin = require('./backend/api/login/login.routes');
 var app = express();
 
 //configure bodyparser
@@ -23,9 +24,7 @@ db();
 // configure app.use()
 app.use(log);
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(bodyParser.urlencoded({extended: true}));
 
 // Error handling
 app.use(function(req, res, next) {
@@ -41,6 +40,7 @@ app.use('/api',router);
 //call heros routing
 usersRoutes(router);
 articlasRoutes(router);
+// authLogin(router);
 
 // intialise server
 app.listen(properties.PORT, (req, res) => {

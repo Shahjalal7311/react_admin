@@ -6,4 +6,5 @@ module.exports = function(router) {
     router.get('/userget/:id', Users.getUser);
     router.put('/userupdate/:id', Users.updateUser);
     router.delete('/userremove/:id', Users.removeUser);
+    router.post('/userlogin/', Users.userLogin);
 }

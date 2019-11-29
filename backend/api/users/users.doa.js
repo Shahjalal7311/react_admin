@@ -20,6 +20,10 @@ usersSchema.statics = {
 
     delete: function(query, cb) {
         this.findOneAndDelete(query,cb);
+    },
+
+    authCheck: function(query, cb) {
+        this.findOne(query, cb);
     }
 }
 
