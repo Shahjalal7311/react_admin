@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+var mongoose = require('mongoose');
 var dbURL = require('../config/properties').DB;
 
 const mongoURL = dbURL;
@@ -9,7 +9,7 @@ const mongoURL = dbURL;
  * @type {Object}
  */
 export const seedersList = {
-
+  Users
 };
 /**
  * Connect to mongodb implementation
