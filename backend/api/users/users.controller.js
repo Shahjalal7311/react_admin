@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 var Users = require('./users.doa');
-var BCRYPT_SALT_ROUNDS = 12;
 var JWT_KEY = 'secretweb'
 
 module.exports = {
@@ -10,9 +9,10 @@ module.exports = {
     getUser,
     updateUser,
     removeUser,
+    apiAuthcheck,
     userLogin
 };
-async function createUser (req, res, next) {
+function createUser (req, res, next) {
     var name = req.body.username;
     var email = req.body.email;
     var user = {
@@ -31,7 +31,7 @@ async function createUser (req, res, next) {
     })
 }
 
-async function getUsers(req, res, next) {
+function getUsers(req, res, next) {
     Users.usersget({}, function(err, users) {
         if(err) {
             console.log(err.keyValue,'duplicate user');
@@ -42,7 +42,7 @@ async function getUsers(req, res, next) {
     })
 }
 
-async function getUser(req, res, next) {
+function getUser(req, res, next) {
     Users.findById({"_id": req.params.id}, function(err, user) {
         if(err) {
             console.log(err.keyValue,'duplicate user');
@@ -53,7 +53,7 @@ async function getUser(req, res, next) {
     })
 }
 
-async function updateUser(req, res, next) {
+function updateUser(req, res, next) {
     var name = req.body.username;
     var email = req.body.email;
     var user = {
@@ -72,7 +72,7 @@ async function updateUser(req, res, next) {
     })
 }
 
-async function removeUser(req, res, next) {
+function removeUser(req, res, next) {
   Users.delete({_id: req.params.id}, function(err, user) {
         if(err) {
             console.log(err.keyValue,'error');
@@ -83,8 +83,23 @@ async function removeUser(req, res, next) {
     })
 }
 
+ function apiAuthcheck(req) {
+    Users.findOneuser({"email": req.email}, async function(err, user) {
+        if(err) {
+            console.log(err.keyValue,'error');
+        }
+        var userObj = {
+            "_id":  user._id,
+            "username": user.username,
+            "email": user.email,
+            "acess_token": user.acess_token,
+        }
+        return userObj;
+    })
+}
+
 function userLogin(req, res, next) {
-    Users.authCheck({email: req.body.email}, async function(err, user){
+    Users.authCheck({email: req.body.username}, async function(err, user){
         if (!user) {
             return res.status(401).send({status: 401,err: 'Login failed! Check authentication credentials'})
         }
@@ -92,6 +107,12 @@ function userLogin(req, res, next) {
         if (!isPasswordMatch) {
             return res.status(401).send({status: 401, err: 'Invalid login credentials' })
         }
-        res.json({user: user})
+        var name = req.body.username;
+        var email = req.body.email;
+        var userObj = {
+            "refres_token": jwt.sign({name,email},JWT_KEY),
+            "user": user,
+        }
+        res.json({user:userObj})
     })
 }

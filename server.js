@@ -5,10 +5,9 @@ var bcrypt = require('bcrypt');
 
 var properties = require('./backend/config/properties');
 var db = require('./backend/config/db');
-//hero routes
+// routes
 var usersRoutes = require('./backend/api/users/users.routes');
 var articlasRoutes = require('./backend/api/artical/artical.routes');
-// var authLogin = require('./backend/api/login/login.routes');
 var app = express();
 
 //configure bodyparser
@@ -17,7 +16,6 @@ var bodyParserURLEncoded = bodyParser.urlencoded({extended:true});
 
 //initialise express router
 var router = express.Router();
-
 // call the database connectivity function
 db();
 
@@ -37,10 +35,9 @@ app.use(function(req, res, next) {
 
 // use express router
 app.use('/api',router);
-//call heros routing
+//call routing
 usersRoutes(router);
 articlasRoutes(router);
-// authLogin(router);
 
 // intialise server
 app.listen(properties.PORT, (req, res) => {

@@ -1,8 +1,6 @@
 import { baseService } from './config/base.service';
 import { userConstants } from '../_constants';
 import { authHeader } from '../_helpers';
-import { configureFakeBackend } from '../_helpers';
-configureFakeBackend();
 
 export const userService = {
     login,
@@ -11,11 +9,9 @@ export const userService = {
     getAll,
     getById,
     updateUser,
-    checkAuth,
     delete: _delete
 };
 
-let apiUrl = 'http://localhost:3000/';
 let _apipath = baseService();
 
 function login(username, password) {
@@ -24,26 +20,34 @@ function login(username, password) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
     };
-    return fetch(`/users/authenticate`, requestOptions)
+    return fetch(`${_apipath}/userlogin`, requestOptions)
         .then(handleResponse)
         .then(user => {
-            localStorage.setItem('user', JSON.stringify(user));
+            var usee = user.user.user;
+            var userObj = {
+                "_id": usee._id,
+                "username": usee.username,
+                "email": usee.email,
+                "acess_token": usee.acess_token,
+                "refres_token": user.user.refres_token
+            }
+            localStorage.setItem('user', JSON.stringify(userObj));
             return user;
         });
 }
 
-function checkAuth() {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
-    };
-    return fetch(`/checkauthenticate`, requestOptions)
-        .then(handleResponse)
-        .then(user => {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.getItem('user', JSON.stringify(user));
-        });
-}
+// function checkAuth() {
+//     const requestOptions = {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' }
+//     };
+//     return fetch(`/checkauthenticate`, requestOptions)
+//         .then(handleResponse)
+//         .then(user => {
+//             // store user details and jwt token in local storage to keep user logged in between page refreshes
+//             localStorage.getItem('user', JSON.stringify(user));
+//         });
+// }
 
 function logout() {
     // remove user from local storage to log user out
@@ -55,7 +59,6 @@ function getAll() {
         method: 'GET',
         headers: authHeader()
     };
-
     return fetch(`${_apipath}/usersget`, requestOptions).then(handleResponseOth);
 }
 

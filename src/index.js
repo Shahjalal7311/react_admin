@@ -10,9 +10,6 @@ import './index.css';
 import { store } from './_helpers';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-// setup fake backend
-import { configureFakeBackend } from './_helpers';
-configureFakeBackend();
 render(
   <Provider store={store}>
       <App />

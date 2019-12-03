@@ -1,20 +1,22 @@
 const jwt = require('jsonwebtoken')
-const User = require('../api/users/users.model')
+var JWT_KEY = 'secretweb';
+const User = require('../api/users/users.controller');
 
 const auth = async(req, res, next) => {
-    const token = req.header('Authorization').replace('Bearer ', '')
-    const data = jwt.verify(token, process.env.JWT_KEY)
-    try {
-        const user = await User.findOne({ _id: data._id, 'tokens.token': token })
-        if (!user) {
-            throw new Error()
+    const tokendata = req.header('Authorization');
+    try{
+        const token = tokendata.replace('Bearer ', '')
+        if (!token) return res.status(401).send("Access denied. No token provided.");
+        try {
+            const decoded = jwt.verify(token, JWT_KEY)
+            req.user = decoded;
+            next();
+        } catch (error) {
+            res.status(401).send({ error: 'Invalid token.' })
         }
-        req.user = user
-        req.token = token
-        next()
     } catch (error) {
-        res.status(401).send({ error: 'Not authorized to access this resource' })
+        res.status(401).send({ error: 'Access denied. No token provided.' })
     }
-
 }
+
 module.exports = auth

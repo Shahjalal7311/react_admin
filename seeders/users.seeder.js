@@ -1,5 +1,5 @@
 import { Seeder } from 'mongoose-data-seed';
-import { Users } from '../backend/api/users/users.controller';
+import { Users } from '../backend/api/users/users.model';
 
 const data = [{
   {
@@ -21,7 +21,8 @@ class UsersSeeder extends Seeder {
   }
 
   async run() {
-    return Users.createUser(data);
+    console.log(data,'data');
+    // return Users.create(data);
   }
 }
 
