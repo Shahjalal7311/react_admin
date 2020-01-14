@@ -17,7 +17,7 @@ function create(artical) {
     // console.log(user);
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { ...authHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify(artical)
     };
     return fetch(`${apiUrl}/articalcreate`, requestOptions).then(handleResponse);

@@ -65,7 +65,7 @@ function getAll() {
 function register(user) {
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { ...authHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
     return fetch(`${_apipath}/usercreate`, requestOptions).then(handleResponse);

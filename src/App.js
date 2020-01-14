@@ -8,7 +8,7 @@ import { history } from './_helpers';
 import { alertActions } from './_actions';
 import { PrivateRoute } from './_components';
 import { userActions } from './_actions';
-import Auth from './Auth/Auth';
+import Auth from '../src/Auth/auth';
 import { emptyStatement } from '@babel/types';
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 

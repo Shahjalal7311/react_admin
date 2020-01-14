@@ -11,7 +11,7 @@ export const articalActions = {
     delete: _delete
 };
 
-function create(artical){
+function create(artical) {
     return dispatch => {
 			dispatch(request(artical));
 			articalService.create(artical)
