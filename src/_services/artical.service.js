@@ -14,7 +14,6 @@ let apiUrl = 'http://localhost:4000/api';
 let _apipath = baseService();
 
 function create(artical) {
-    // console.log(user);
     const requestOptions = {
         method: 'POST',
         headers: { ...authHeader(), 'Content-Type': 'application/json' },

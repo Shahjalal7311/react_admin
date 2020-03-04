@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import $ from 'min-jquery';
+import 'react-dropzone-uploader/dist/styles.css'
+import Dropzone from 'react-dropzone-uploader'
+import "./Artical.css";
 import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, 
   InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 
@@ -14,6 +17,7 @@ class ArticalEdit extends Component {
         artical: {
           title: '',
           slug: '',
+          files: [],
           description: '',
           metaTitle: '',
           metaKeyword: '',
@@ -44,7 +48,7 @@ class ArticalEdit extends Component {
     });
   }
 
-  handleSubmit(event) {
+  handleSubmit(event, files, allFiles) {
     event.preventDefault();
     const { name, value } = event.target;
     const updateItem = {
@@ -62,6 +66,19 @@ class ArticalEdit extends Component {
   render() {
     const { articals  } = this.props;
     const { submitted } = this.state;
+
+    const getUploadParams = ({ file, meta }) => {
+      const form = new FormData()
+      $('form').append('<input type="hidden" name="file_name[]" value="' + file.name + '">')
+      return { url: 'http://localhost:4000/api/fileupload', form }
+    }
+    const handleChangeStatus = ({ files, allFiles }, status) => { 
+      allFiles.forEach(f => f.remove())
+    }
+    // const handleSubmit = (files, files) => {
+    //   console.log(files.map(f => f.meta))
+    //   allFiles.forEach(f => f.remove())
+    // }
 
     if(articals.item){
       return (
@@ -82,6 +99,12 @@ class ArticalEdit extends Component {
                       </InputGroup>
                       <InputGroup className="mb-3">
                         <Input name="description" type="text" placeholder="description" autoComplete="description" onChange={this.handleChange} defaultValue={articals.item.description}/>
+                      </InputGroup>
+                      <InputGroup className="mb-3">
+                      <Dropzone getUploadParams={getUploadParams}
+                        onChangeStatus={handleChangeStatus}
+                        accept="image/*,audio/*,video/*"
+                      />
                       </InputGroup>
                       <InputGroup className="mb-3">
                         <Input name="metaTitle" type="text" placeholder="metaTitle" autoComplete="metaTitle" onChange={this.handleChange} defaultValue={articals.item.metaTitle}/>

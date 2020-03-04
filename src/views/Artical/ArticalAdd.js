@@ -1,11 +1,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Dropzone from "../../dropzone/Dropzone";
+import DropzoneComponent from 'react-dropzone-component';
+import "./Artical.css";
 
 import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, 
   InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 
 import { articalActions } from '../../_actions'; 
+
+var componentConfig = { 
+    postUrl: 'no-url',
+    showFiletypeIcon: true,
+  };
+var djsConfig = {
+  addRemoveLinks: true,
+  fileName:false,
+  acceptedFiles: "image/jpeg,image/png,image/gif",
+  autoProcessQueue: true
+};
+var eventHandlers = { addedfile: (file) => console.log(file) }
 
 class ArticalAdd extends Component {
   constructor(props) {
@@ -16,6 +31,7 @@ class ArticalAdd extends Component {
           title: '',
           slug: '',
           description: '',
+          files: [],
           metaTitle: '',
           metaKeyword: '',
           order: '',
@@ -64,6 +80,12 @@ class ArticalAdd extends Component {
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <Input name="description" type="text" placeholder="description" autoComplete="description" onChange={this.handleChange}/>
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                    <DropzoneComponent config={componentConfig}
+                       eventHandlers={eventHandlers}
+                       djsConfig={djsConfig} />
+                      {/* <Dropzone onFilesAdded={console.log} /> */}
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <Input name="metaTitle" type="text" placeholder="metaTitle" autoComplete="metaTitle" onChange={this.handleChange}/>

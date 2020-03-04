@@ -17,6 +17,9 @@ var articlasSchema = new Schema({
             unique : false,
             required : false
         },
+        images : [
+            
+        ],
         metaTitle :{
             type: String,
             unique : false,

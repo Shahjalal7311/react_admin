@@ -10,6 +10,8 @@ var usersRoutes = require('./backend/api/users/users.routes');
 var articlasRoutes = require('./backend/api/artical/artical.routes');
 var app = express();
 
+// Image upload
+
 //configure bodyparser
 var bodyParserJSON = bodyParser.json();
 var bodyParserURLEncoded = bodyParser.urlencoded({extended:true});
