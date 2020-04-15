@@ -1,9 +1,9 @@
 var Articlas = require('./artical.doa');
-
 exports.createArtical = function (req, res, next) {
     var artical = {  
       title: req.body.title,
       slug: req.body.slug,
+      images : [req.body.images],
       description: req.body.description,
       metaTitle: req.body.metaTitle,
       metaKeyword: req.body.metaKeyword,
@@ -24,14 +24,30 @@ exports.createArtical = function (req, res, next) {
 }
 
 exports.getArticals = function(req, res, next) {
-    Articlas.get({}, function(err, articals) {
+    const limit = req.params.limit;
+    const query = Articlas;
+    const artical = query.get({},limit, function(err, articals) {
         if(err) {
             res.json({
                 error: err
             })
         }
         res.json({
-            articals: articals
+            articals:articals
+        })
+    });
+}
+
+exports.getArticalsTotal = function(req, res, next) {
+    const query = Articlas;
+    query.getcount({}, function(err, total) {
+        if(err) {
+            res.json({
+                error: err
+            })
+        }
+        res.json({
+            articals_total:total
         })
     })
 }
@@ -53,6 +69,7 @@ exports.updateArtical = function(req, res, next) {
     var artical = {
         title: req.body.title,
         slug: req.body.slug,
+        images : [req.body.images],
         description: req.body.description,
         metaTitle: req.body.metaTitle,
         metaKeyword: req.body.metaKeyword,

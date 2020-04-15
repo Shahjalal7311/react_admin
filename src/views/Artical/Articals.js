@@ -1,24 +1,51 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PaginationComponent from "react-reactstrap-pagination";
 import { Badge, Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
-import{ baseService } from '../../_services/config/base.service'
+
+import { baseSettings } from '../../_services/config/base.setting';
+
+import{ imagePathService } from '../../_services/config/image.path.service'
 import { articalActions } from '../../_actions'; 
 
 class Articals extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      selectedPage: 1
+    }
+    this.handleSelected = this.handleSelected.bind(this);
   }
-  componentDidMount() {
-    this.props.getArticals();
+  componentDidMount(selectedPage) {
+    this.props.getArticals(selectedPage);
+    this.props.getArticalsTotal();
+  }
+
+  handleSelected(selectedPage) {
+    this.props.getArticals(selectedPage);
+    this.props.getArticalsTotal();
+    this.setState({ selectedPage: selectedPage });
   }
 
   handleDeleteUser(id) {
     return (e) => this.props.deleteArtical(id);
   }
+
+  firstImage(images){
+    const imgPath = imagePathService();
+    if(images[0]){
+      return imgPath+'/uploads/'+images[0][0];
+    }else{
+      return imgPath+'/assets/img/avatars/1.jpg';
+    }
+  }
   
   render() {
     const { articals } = this.props;
+    const tottalItem = articals && articals.totalItems;
+    let pageSize = baseSettings().pazeSize;
+    console.log(pageSize,'pageSize');
     return (
       <div className="animated fadeIn">
         <Row>
@@ -31,24 +58,25 @@ class Articals extends Component {
                 </Link>
               </CardHeader>
               <CardBody>
-                {articals.loading && <em>Loading articals...</em>}
                 {articals.error && <span className="text-danger">ERROR: {articals.error}</span>}
                 <Table responsive hover>
                   <thead>
                     <tr>
                       <th scope="col">ID#</th>
+                      <th scope="col">Image</th>
                       <th scope="col">Title</th>
                       <th scope="col">Slug</th>
                       <th scope="col">Order</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
-                  {articals.items &&
+                  {articals.items && 
+                  
                     <tbody>
-                        {articals.items.map((artical, index) =>
-                          // const editLink = '/artical-edit/'+ artical.id;
+                        {articals.items['articals'].map((artical, index) =>
                           <tr key={artical._id}>
                             <th scope="row">{artical._id}</th>
+                            <td><img if={artical.images} height="50" width="50" src={`${this.firstImage(artical.images)}`} /> </td>
                             <td>{artical.title}</td>
                             <td>{artical.slug}</td>
                             <td>{artical.order}</td>
@@ -63,6 +91,13 @@ class Articals extends Component {
                       </tbody>
                     }  
                 </Table>
+                {tottalItem && <PaginationComponent
+                  totalItems={tottalItem}
+                  pageSize={pageSize}
+                  onSelect={this.handleSelected}
+                  maxPaginationNumbers={9}
+                  defaultActivePage={this.selectedPage}
+                />}
               </CardBody>
             </Card>
           </Col>
@@ -79,6 +114,7 @@ function mapState(state) {
 
 const mapDispatchToProps = {
   getArticals: articalActions.getAll,
+  getArticalsTotal: articalActions.getTotal,
   deleteArtical: articalActions.delete
 }
 

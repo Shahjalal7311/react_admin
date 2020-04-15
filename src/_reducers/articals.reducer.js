@@ -3,33 +3,60 @@ import { articalConstants } from '../_constants';
 export function articals(state = {}, action) {
   switch (action.type) {
     case articalConstants.CREATE_REQUEST:
-      return { registering: true };
+      return { 
+        ...state,
+        registering: true 
+      };
     case articalConstants.CREATE_SUCCESS:
-      return {};
+      return {
+        ...state,
+      };
     case articalConstants.CREATE_FAILURE:
-      return {};
+      return {
+        ...state,
+      };
     case articalConstants.GETALL_REQUEST:
       return {
+        ...state,
         loading: true
       };
     case articalConstants.GETALL_SUCCESS:
       return {
+        ...state,
         items: action.articals
       };
     case articalConstants.GETALL_FAILURE:
       return { 
+        ...state,
         error: action.error
       };
+    case articalConstants.GETTOTAL_REQUEST:
+      return {
+        ...state
+      };
+    case articalConstants.GETTOTAL_SUCCESS:
+      return {
+        ...state,
+        totalItems: action.totalItems
+      };
+    case articalConstants.GETTOTAL_FAILURE:
+      return { 
+        ...state,
+        error: action.error
+      };  
     case articalConstants.GET_REQUEST:
       return {
+        ...state,
         loading: true
       };
     case articalConstants.GET_SUCCESS:
       return {
+        ...state,
         item: action.artical
       };
     case articalConstants.GET_FAILURE:
       return { 
+        ...state,
         error: action.error
       };  
     case articalConstants.DELETE_REQUEST:
@@ -45,6 +72,7 @@ export function articals(state = {}, action) {
     case articalConstants.DELETE_SUCCESS:
       // remove deleted user from state
       return {
+        ...state,
         items: state.items.filter(artical => artical.id !== action.id)
       };
     case articalConstants.DELETE_FAILURE:

@@ -5,13 +5,13 @@ import { authHeader } from '../_helpers';
 export const articalService = {
     create,
     getAll,
+    getTotal,
     getById,
     update,
     delete: _delete
 };
 
-let apiUrl = 'http://localhost:4000/api';
-let _apipath = baseService();
+let apiUrl = baseService();
 
 function create(artical) {
     const requestOptions = {
@@ -22,13 +22,21 @@ function create(artical) {
     return fetch(`${apiUrl}/articalcreate`, requestOptions).then(handleResponse);
 }
 
-function getAll() {
+function getAll(limit) {
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
     };
 
-    return fetch(`${apiUrl}/articalsget`, requestOptions).then(handleResponse);
+    return fetch(`${apiUrl}/articalsget/${limit}`, requestOptions).then(handleResponse);
+}
+
+function getTotal(){
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+    return fetch(`${apiUrl}/articalstotal`, requestOptions).then(handlecount);
 }
 
  async function getById(id) {
@@ -56,7 +64,6 @@ function _delete(id) {
         method: 'DELETE',
         headers: authHeader(),
     };
-
     return fetch(`${apiUrl}/articalremove/${id}`, requestOptions).then(handleResponse);
 }
 
@@ -68,11 +75,16 @@ function handleResponse(response) {
                 // auto logout if 401 response returned from api
                 return response.status;
             }
-
             const error = (data && data.message) || response.statusText;
             return Promise.reject(error);
         }
-        const res = data.articals;
+        const requestOptions = {
+            method: 'GET',
+            headers: authHeader()
+        };
+        const res = {
+            "articals": data.articals
+        };
         return res;
     });
 }
@@ -91,5 +103,21 @@ function handleResponseSing(response) {
             return Promise.reject(error);
         }
         return data;
+    });
+}
+
+function handlecount(response) {
+    return response.text().then(text => {
+        const data = text && JSON.parse(text);
+        if (!response.ok) {
+            if (response.status === 401) {
+                // auto logout if 401 response returned from api
+                return response.status;
+            }
+            const error = (data && data.message) || response.statusText;
+            return Promise.reject(error);
+        }
+        // console.log(data,'hhhh');
+        return data.articals_total.length;
     });
 }

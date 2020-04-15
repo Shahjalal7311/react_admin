@@ -8,6 +8,7 @@ export const articalActions = {
     update,
     getById,
     getAll,
+    getTotal,
     delete: _delete
 };
 
@@ -32,11 +33,11 @@ function create(artical) {
     function success(artical) { return { type: articalConstants.CREATE_SUCCESS, artical } }
     function failure(error) { return { type: articalConstants.CREATE_FAILURE, error } }
 }
-function getAll() {
+function getAll(limit) {
     return dispatch => {
         dispatch(request());
 
-        articalService.getAll()
+        articalService.getAll(limit)
             .then(
               articals => dispatch(success(articals)),
               error => dispatch(failure(error.toString()))
@@ -46,6 +47,22 @@ function getAll() {
     function request() { return { type: articalConstants.GETALL_REQUEST } }
     function success(articals) { return { type: articalConstants.GETALL_SUCCESS, articals } }
     function failure(error) { return { type: articalConstants.GETALL_FAILURE, error } }
+}
+
+function getTotal(){
+    return dispatch => {
+        dispatch(request());
+
+        articalService.getTotal()
+            .then(
+            totalItems => dispatch(success(totalItems)),
+              error => dispatch(failure(error.toString()))
+            );
+    };
+
+    function request() { return { type: articalConstants.GETTOTAL_REQUEST } }
+    function success(totalItems) { return { type: articalConstants.GETTOTAL_SUCCESS, totalItems } }
+    function failure(error) { return { type: articalConstants.GETTOTAL_FAILURE, error } }
 }
 
 function getById(id) {

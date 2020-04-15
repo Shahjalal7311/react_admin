@@ -7,27 +7,27 @@ import Dropzone from 'react-dropzone-uploader'
 import "./Artical.css";
 import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, 
   InputGroupAddon, InputGroupText, Row } from 'reactstrap';
-
 import { articalActions } from '../../_actions'; 
 
 class ArticalEdit extends Component {
   constructor(props) {
-      super(props);
-      this.state = {
-        artical: {
-          title: '',
-          slug: '',
-          files: [],
-          description: '',
-          metaTitle: '',
-          metaKeyword: '',
-          metaDescription: '',
-        },
-        submitted: false
-      };
+    super(props);
+    this.state = {
+      artical: {
+        title: '',
+        slug: '',
+        file_name: [],
+        description: '',
+        metaTitle: '',
+        metaKeyword: '',
+        metaDescription: '',
+      },
+      submitted: false,
+      selectedPage: 1
+    };
 
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount(){
@@ -51,6 +51,7 @@ class ArticalEdit extends Component {
   handleSubmit(event, files, allFiles) {
     event.preventDefault();
     const { name, value } = event.target;
+    var igmgg = event.target.file_name;
     const updateItem = {
       _id: event.target._id['value'],
       title: event.target.title['value'],
@@ -61,6 +62,28 @@ class ArticalEdit extends Component {
       metaDescription: event.target.metaDescription['value'],
       order: event.target.order['value'],
     }
+    
+    // console.log(igmgg,'igmggigmgg');
+    if(igmgg){
+      if(igmgg.length > 1){
+        var igmgg = event.target.file_name;
+        var new_array = [];
+        for(let i=0; i<igmgg.length;i++){
+          new_array.push(igmgg[i]['defaultValue']);
+        }
+        const updateItem = {
+          images: new_array,
+        }
+      }else{
+        var new_array = [];
+        new_array.push(event.target.file_name['value']);
+        const updateItem = {
+          images: new_array,
+        }
+      }
+    }
+    
+    // return false;
     this.props.articalupdate(updateItem);
   }
   render() {
@@ -69,11 +92,11 @@ class ArticalEdit extends Component {
 
     const getUploadParams = ({ file, meta }) => {
       const form = new FormData()
-      $('form').append('<input type="hidden" name="file_name[]" value="' + file.name + '">')
+      $('.image_append').append('<input type="hidden" type="text" name="file_name" value="' + file.name + '">')
       return { url: 'http://localhost:4000/api/fileupload', form }
     }
-    const handleChangeStatus = ({ files, allFiles }, status) => { 
-      allFiles.forEach(f => f.remove())
+    const handleChangeStatus = ({ file, meta }, status) => { 
+      // console.log(meta, meta)
     }
     // const handleSubmit = (files, files) => {
     //   console.log(files.map(f => f.meta))
@@ -90,7 +113,7 @@ class ArticalEdit extends Component {
                     <Form name="form" onSubmit={this.handleSubmit}>
                     <Input name="_id" type="hidden" onChange={this.handleChange} defaultValue={articals.item._id}/>
                       <p className="text-muted">Edit Artical</p>
-                      {articals.loading && <em>Loading artical...</em>}
+                      {/* {articals.loading && <em>Loading artical...</em>} */}
                       <InputGroup className="mb-3">
                         <Input name="title" type="text" placeholder="Title" autoComplete="title" onChange={this.handleChange} defaultValue={articals.item.title}/>
                       </InputGroup>
@@ -106,6 +129,7 @@ class ArticalEdit extends Component {
                         accept="image/*,audio/*,video/*"
                       />
                       </InputGroup>
+                      <div className="image_append"></div>
                       <InputGroup className="mb-3">
                         <Input name="metaTitle" type="text" placeholder="metaTitle" autoComplete="metaTitle" onChange={this.handleChange} defaultValue={articals.item.metaTitle}/>
                       </InputGroup>
