@@ -8,6 +8,7 @@ var db = require('./backend/config/db');
 // routes
 var usersRoutes = require('./backend/api/users/users.routes');
 var articlasRoutes = require('./backend/api/artical/artical.routes');
+var categoryRoutes = require('./backend/api/category/category.routes');
 var app = express();
 
 // Image upload
@@ -40,6 +41,7 @@ app.use('/api',router);
 //call routing
 usersRoutes(router);
 articlasRoutes(router);
+categoryRoutes(router);
 
 // intialise server
 app.listen(properties.PORT, (req, res) => {

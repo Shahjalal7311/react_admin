@@ -63,7 +63,7 @@ export function articals(state = {}, action) {
       // add 'deleting:true' property to user being deleted
       return {
         ...state,
-        items: state.items.map(articals =>
+        items: state.items['articals'].map(articals =>
           articals.id === action.id
             ? { ...articals, deleting: true }
             : articals
@@ -79,7 +79,7 @@ export function articals(state = {}, action) {
       // remove 'deleting:true' property and add 'deleteError:[error]' property to user 
       return {
         ...state,
-        items: state.items.map(artical => {
+        items: state.items['articals'].map(artical => {
           if (artical.id === action.id) {
             // make copy of user without 'deleting:true' property
             const { deleting, ...articalCopy } = artical;

@@ -18,7 +18,7 @@ class Articals extends Component {
     this.handleSelected = this.handleSelected.bind(this);
   }
   componentDidMount(selectedPage) {
-    this.props.getArticals(selectedPage);
+    this.props.getArticals(this.state.selectedPage);
     this.props.getArticalsTotal();
   }
 
@@ -28,7 +28,8 @@ class Articals extends Component {
     this.setState({ selectedPage: selectedPage });
   }
 
-  handleDeleteUser(id) {
+  handleDeleteArtical(id) {
+    console.log(id,'deleteArticaldeleteArticaldeleteArtical');
     return (e) => this.props.deleteArtical(id);
   }
 
@@ -45,7 +46,6 @@ class Articals extends Component {
     const { articals } = this.props;
     const tottalItem = articals && articals.totalItems;
     let pageSize = baseSettings().pazeSize;
-    console.log(pageSize,'pageSize');
     return (
       <div className="animated fadeIn">
         <Row>
@@ -70,7 +70,7 @@ class Articals extends Component {
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
-                  {articals.items && 
+                  {articals.items && articals.items['articals'] &&
                   
                     <tbody>
                         {articals.items['articals'].map((artical, index) =>
@@ -82,7 +82,7 @@ class Articals extends Component {
                             <td>{artical.order}</td>
                             <td>
                               <Link href="#" to={`artical-edit/${artical._id}/`}><i className="cui-pencil icons"></i></Link>
-                              <a onClick={this.handleDeleteUser(artical._id)} style={{ cursor: 'pointer', color:'#20a8d8' }}>
+                              <a onClick={this.handleDeleteArtical(artical._id)} style={{ cursor: 'pointer', color:'#20a8d8' }}>
                                 <i className="cui-trash icons"></i>
                               </a>
                             </td>
