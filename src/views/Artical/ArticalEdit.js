@@ -31,7 +31,7 @@ class ArticalEdit extends Component {
   }
 
   componentDidMount(){
-    const id = this.props.history.location.pathname.split('/')[2];
+    const id = this.props.history.location.pathname.split('/')[3];
     this.setState({ submitted: true });
     const { artical } = this.state;
     this.props.articalgetById(id);

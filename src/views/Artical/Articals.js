@@ -38,7 +38,7 @@ class Articals extends Component {
     if(images[0]){
       return imgPath+'/uploads/'+images[0][0];
     }else{
-      return imgPath+'/assets/img/avatars/1.jpg';
+      return imgPath+'/admin/assets/img/avatars/1.jpg';
     }
   }
   
@@ -53,7 +53,7 @@ class Articals extends Component {
             <Card>
               <CardHeader>
                 <i className="fa fa-align-justify"></i> Artical <small className="text-muted">List</small>
-                <Link to="/atical-add">
+                <Link to="/admin/atical-add">
                   <i className="fa fa-plus pull-right"> <small className="text-muted">Add</small></i>
                 </Link>
               </CardHeader>
@@ -81,7 +81,7 @@ class Articals extends Component {
                             <td>{artical.slug}</td>
                             <td>{artical.order}</td>
                             <td>
-                              <Link href="#" to={`artical-edit/${artical._id}/`}><i className="cui-pencil icons"></i></Link>
+                              <Link href="#" to={`/admin/artical-edit/${artical._id}/`}><i className="cui-pencil icons"></i></Link>
                               <a onClick={this.handleDeleteArtical(artical._id)} style={{ cursor: 'pointer', color:'#20a8d8' }}>
                                 <i className="cui-trash icons"></i>
                               </a>

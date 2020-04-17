@@ -2,22 +2,22 @@ export default {
   items: [
     {
       name: 'Dashboard',
-      url: '/dashboard',
+      url: '/admin/dashboard',
       icon: 'icon-speedometer'
     },
     {
       name: 'Category',
-      url: '/category',
+      url: '/admin/category',
       icon: 'icon-list'
     },
     {
       name: 'Artical',
-      url: '/artical',
+      url: '/admin/artical',
       icon: 'icon-list'
     },
     {
       name: 'User',
-      url: '/users',
+      url: '/admin/users',
       icon: 'icon-user'
     },
     {

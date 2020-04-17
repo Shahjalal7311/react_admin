@@ -87,7 +87,7 @@ function update(category){
         categoryService.update(category).then(
 			(category) => {
                 dispatch(success(category));
-                history.push('/category');
+                history.push('/admin/category');
             });
     };
 

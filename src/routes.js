@@ -10,6 +10,7 @@ const ArticalEdit = React.lazy(()=> import('./views/Artical/ArticalEdit'));
 //Category
 const Category = React.lazy(()=> import('./views/Category/Category'))
 const CategoryAdd = React.lazy(() => import('./views/Category/CategoryAdd'))
+const CategoryEdit = React.lazy(() => import('./views/Category/CategoryEdit'))
 
 const Register = React.lazy(() => import('./views/Register'));
 const UserAdd = React.lazy(() => import('./views/Users/User.add'));
@@ -19,15 +20,16 @@ const User = React.lazy(() => import('./views/Users/User'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
-  { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+  { path: '/admin/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/logout', name: 'Dashboard', component: LogOut },
-  { path: '/category', name: 'Artical', component: Category },
-  { path: '/category-add', name: 'Category Add', component: CategoryAdd },
-  { path: '/artical', name: 'Artical', component: Artical },
-  { path: '/atical-add', name: 'Artical Add', component: ArticalAdd },
-  { path: '/artical-edit/:id', name: 'Artical Edit', component: ArticalEdit },
+  { path: '/admin/category', name: 'Artical', component: Category },
+  { path: '/admin/category-add', name: 'Category Add', component: CategoryAdd },
+  { path: '/admin/category-edit', name: 'Category Edit', component: CategoryEdit },
+  { path: '/admin/artical', name: 'Artical', component: Artical },
+  { path: '/admin/atical-add', name: 'Artical Add', component: ArticalAdd },
+  { path: '/admin/artical-edit/:id', name: 'Artical Edit', component: ArticalEdit },
   { path: '/user-add', name: 'User Add', component: UserAdd },
-  { path: '/users', name: 'Users', component: Users },
+  { path: '/admin/users', name: 'Users', component: Users },
   { path: '/users-edit/:id', name: 'User Edit', component: UserEdit },
 ];
 

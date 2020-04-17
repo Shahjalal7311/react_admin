@@ -25,7 +25,7 @@ function login(username, password) {
                 user => { 
                     dispatch(success(user));
                     // this.props.history.push('#/dashboard');
-                    history.push('/dashboard');
+                    history.push('/admin/dashboard');
                     // history.push('#/dashboard');
                 },
                 error => {
@@ -58,7 +58,7 @@ function register(user) {
             .then(
                 user => { 
                     dispatch(success());
-                    history.push('/users');
+                    history.push('/admin/users');
                     dispatch(alertActions.success('Registration successful'));
                 },
                 error => {
@@ -111,7 +111,7 @@ function updateUser(user){
         userService.updateUser(user).then(
 			(user) => {
                 dispatch(success(user));
-                history.push('/users');
+                history.push('/admin/users');
             });
     };
 

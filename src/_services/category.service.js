@@ -46,7 +46,7 @@ function getTotal(){
     };
     // console.log(id,'idddd');
     const data = await fetch(`${apiUrl}/singlecategoryget/${id}`, requestOptions).then(handleResponseSing);
-    return data.artical;
+    return data.category;
 }
 
 function update(category) {
@@ -117,7 +117,6 @@ function handlecount(response) {
             const error = (data && data.message) || response.statusText;
             return Promise.reject(error);
         }
-        // console.log(data,'hhhh');
         return data.categorys_total.length;
     });
 }

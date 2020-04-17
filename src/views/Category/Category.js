@@ -31,8 +31,8 @@ class Categorys extends Component {
     this.setState({ selectedPage: selectedPage });
   }
 
-  handleDeleteUser(id) {
-    return (e) => this.props.deleteArtical(id);
+  handleDeleteCategory(id) {
+    return (e) => this.props.deleteCategory(id);
   }
 
  render() {
@@ -47,7 +47,7 @@ class Categorys extends Component {
             <Card>
               <CardHeader>
                 <i className="fa fa-align-justify"></i> Category <small className="text-muted">List</small>
-                <Link to="/category-add">
+                <Link to="/admin/category-add">
                   <i className="fa fa-plus pull-right"> <small className="text-muted">Add</small></i>
                 </Link>
               </CardHeader>
@@ -73,7 +73,10 @@ class Categorys extends Component {
                       <td>{category.slug}</td>
                       <td>{category.order}</td>
                       <td>
-                        
+                        <Link href="#" to={`/admin/category-edit/${category._id}/`}><i className="cui-pencil icons"></i></Link>
+                        <a onClick={this.handleDeleteCategory(category._id)} style={{ cursor: 'pointer', color:'#20a8d8' }}>
+                          <i className="cui-trash icons"></i>
+                        </a>
                       </td>
                     </tr>  
                     )}

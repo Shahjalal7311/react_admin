@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import $ from 'min-jquery';
 import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, 
   InputGroupAddon, InputGroupText, Row } from 'reactstrap';
-
 import { Editor } from '@tinymce/tinymce-react';
-
 
 import { categoryActions } from '../../_actions'; 
 import "./Category.css";
@@ -20,7 +18,7 @@ class CategoryAdd extends Component {
         slug: '',
         order: '',
       },
-      content: '',
+      description: '',
       submitted: false
     };
 
@@ -43,19 +41,18 @@ class CategoryAdd extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.setState({ submitted: true });
-    const { category, content } = this.state;
+    const { category, description } = this.state;
     const { name, value } = event.target;
     const addItem = {
       title: event.target.title['value'],
       slug: event.target.slug['value'],
-      description: content,
+      description: description,
       order: event.target.order['value'],
     }
-    console.log(addItem,'addItem');
     this.props.categoryCreate(addItem);
   }
-  handleEditorChange(content, editor) {
-    this.setState({ content });
+  handleEditorChange(description, editor) {
+    this.setState({ description });
   }
   render() {
     const { category  } = this.props;
@@ -79,7 +76,7 @@ class CategoryAdd extends Component {
                       initialValue=''
                       init={{
                         height: 250,
-                        menubar: false,
+                        menubar: true,
                         plugins: [
                           'advlist autolink lists link image charmap print preview anchor',
                           'searchreplace visualblocks code fullscreen',
@@ -87,7 +84,7 @@ class CategoryAdd extends Component {
                         ],
                         toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help'
                       }}
-                      value={this.state.content}
+                      value={this.state.description}
                       onEditorChange={this.handleEditorChange}
                     />
                       {/* <Input name="description" type="text" placeholder="description" autoComplete="description" onChange={this.handleChange}/> */}
