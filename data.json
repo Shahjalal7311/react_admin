@@ -1,0 +1,11 @@
+{
+  "users": {
+      "_model": "Users",
+      "data": {
+        "_id" : "5e57823424888b10df326ea2", 
+        "username" : "shahjalal", 
+        "email" : "mdjalal2012@gmail.com", 
+        "password" : "$2b$10$WhDP3lO5avHB1vXaC.dpnejHso87gVAS.Hxz9iwJN6TZ0b95vV/IW"
+      }
+  }
+}

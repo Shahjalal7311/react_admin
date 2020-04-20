@@ -55,3 +55,20 @@ CoreUI-React#v2.0.0
 └── package.json
 ```
 
+## Insert Data in mongo console
+
+```
+db.users.insert( 
+  { 
+    username: "user1", 
+    email: 'demo@gmail.com', 
+    password: '$2b$10$WhDP3lO5avHB1vXaC.dpnejHso87gVAS.Hxz9iwJN6TZ0b95vV/IW'
+  }
+);
+db.users.insert( {
+  username: 'user2',
+  email: 'developers@example.com',
+  password: '$2b$10$WhDP3lO5avHB1vXaC.dpnejHso87gVAS.Hxz9iwJN6TZ0b95vV/IW'
+})
+```
+

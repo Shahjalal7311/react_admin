@@ -1,0 +1,40 @@
+{ 
+    "_id" : ObjectId("5e982777a1a52358da68b9b4"), 
+    "title" : "general info", 
+    "slug" : "cat-01", 
+    "description" : null, 
+    "order" : "1", 
+    "createdAt" : ISODate("2020-04-16T09:37:59.587+0000"), 
+    "updatedAt" : ISODate("2020-04-17T06:26:01.373+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5e9827c8a1a52358da68b9b5"), 
+    "title" : "test test test ", 
+    "slug" : "cat-02", 
+    "description" : "", 
+    "order" : "2", 
+    "createdAt" : ISODate("2020-04-16T09:39:20.119+0000"), 
+    "updatedAt" : ISODate("2020-04-17T06:26:34.085+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5e9827d0a1a52358da68b9b6"), 
+    "title" : "test test test ", 
+    "slug" : "cat-04", 
+    "description" : "<p>test test test&nbsp;</p>", 
+    "order" : "3", 
+    "createdAt" : ISODate("2020-04-16T09:39:28.748+0000"), 
+    "updatedAt" : ISODate("2020-04-17T06:26:24.961+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5e9827d6a1a52358da68b9b7"), 
+    "title" : "test test test ", 
+    "slug" : "cat-04", 
+    "description" : "<p>test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test&nbsp;</p>", 
+    "order" : "4", 
+    "createdAt" : ISODate("2020-04-16T09:39:34.189+0000"), 
+    "updatedAt" : ISODate("2020-04-16T09:39:34.189+0000"), 
+    "__v" : NumberInt(0)
+}

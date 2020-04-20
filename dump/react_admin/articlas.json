@@ -1,0 +1,89 @@
+{ 
+    "_id" : ObjectId("5e57839fdf5cd494f6628dc6"), 
+    "title" : "Lorem Ipsum is simply dummy text of the printing and typesetting industry dfd", 
+    "slug" : "slug-01", 
+    "description" : "Lorem Ipsum is simply dummy text of the printing and typesetting industry", 
+    "metaTitle" : "Lorem Ipsum", 
+    "metaKeyword" : "Lorem Ipsum ", 
+    "metaDescription" : "Lorem Ipsum is simply ", 
+    "order" : "1", 
+    "createdAt" : ISODate("2020-02-27T08:53:51.071+0000"), 
+    "updatedAt" : ISODate("2020-03-05T04:40:41.638+0000"), 
+    "__v" : NumberInt(0), 
+    "images" : [
+        [
+            "ryuukishi_red.png", 
+            "ryuukishi_skyblue.png"
+        ]
+    ]
+}
+{ 
+    "_id" : ObjectId("5e58df6ff451331f340d1596"), 
+    "title" : "Lorem Ipsum is simply dummy text of the printing and typesetting industry 1222", 
+    "slug" : "slug-02", 
+    "description" : "Lorem Ipsum is simply dummy text of the printing and typesetting industry 1222", 
+    "metaTitle" : "test 122", 
+    "metaKeyword" : "test 122", 
+    "metaDescription" : "tes", 
+    "order" : "2", 
+    "createdAt" : ISODate("2020-02-28T09:37:51.067+0000"), 
+    "updatedAt" : ISODate("2020-04-15T08:58:44.887+0000"), 
+    "__v" : NumberInt(0), 
+    "images" : [
+        null
+    ]
+}
+{ 
+    "_id" : ObjectId("5e60857b6c48994db20f0de5"), 
+    "images" : [
+        [
+            "mahotsukai_purple.png", 
+            "mahotsukai_yellowgreen.png"
+        ]
+    ], 
+    "title" : "test", 
+    "slug" : "slug-10", 
+    "description" : "test", 
+    "metaTitle" : "test", 
+    "metaKeyword" : "test", 
+    "metaDescription" : "tes", 
+    "order" : "3", 
+    "createdAt" : ISODate("2020-03-05T04:52:11.209+0000"), 
+    "updatedAt" : ISODate("2020-03-05T04:55:06.100+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5e6085f96c48994db20f0de6"), 
+    "images" : [
+        [
+            "syoukanshi_yellowgreen.png", 
+            "yogensya_skyblue.png"
+        ]
+    ], 
+    "title" : "test", 
+    "slug" : "slug-11", 
+    "description" : "Hellow Shahjalal", 
+    "metaTitle" : "test", 
+    "metaKeyword" : "test", 
+    "metaDescription" : "test", 
+    "order" : "4", 
+    "createdAt" : ISODate("2020-03-05T04:54:17.899+0000"), 
+    "updatedAt" : ISODate("2020-03-05T04:55:18.099+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5e609b5a6c48994db20f0de8"), 
+    "images" : [
+
+    ], 
+    "title" : "test", 
+    "slug" : "slug-11", 
+    "description" : "Hellow Shahjalal", 
+    "metaTitle" : "hello", 
+    "metaKeyword" : "hellow", 
+    "metaDescription" : "hello", 
+    "order" : "6", 
+    "createdAt" : ISODate("2020-03-05T06:25:30.271+0000"), 
+    "updatedAt" : ISODate("2020-03-05T06:25:30.271+0000"), 
+    "__v" : NumberInt(0)
+}
