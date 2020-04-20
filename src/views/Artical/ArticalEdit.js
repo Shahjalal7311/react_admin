@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import $ from 'min-jquery';
 import 'react-dropzone-uploader/dist/styles.css'
 import Dropzone from 'react-dropzone-uploader'
+import { Editor } from '@tinymce/tinymce-react';
+
 import "./Artical.css";
 import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, 
   InputGroupAddon, InputGroupText, Row } from 'reactstrap';
@@ -17,46 +19,49 @@ class ArticalEdit extends Component {
         title: '',
         slug: '',
         file_name: [],
-        description: '',
         metaTitle: '',
         metaKeyword: '',
         metaDescription: '',
       },
+      description: '',
       submitted: false,
       selectedPage: 1
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleEditorChange = this.handleEditorChange.bind(this);
   }
 
   componentDidMount(){
     const id = this.props.history.location.pathname.split('/')[3];
     this.setState({ submitted: true });
-    const { artical } = this.state;
+    const { artical, description } = this.state;
     this.props.articalgetById(id);
   }
 
   handleChange(event) {
     const { name, value } = event.target;
-    const { artical } = this.state;
+    const { artical, description } = this.state;
     this.setState({
         artical: {
             ...artical,
             [name]: value
-        }
+        },
+        description: ''
     });
   }
 
   handleSubmit(event, files, allFiles) {
     event.preventDefault();
     const { name, value } = event.target;
+    const { description } = this.state;
     var igmgg = event.target.file_name;
     const updateItem = {
       _id: event.target._id['value'],
       title: event.target.title['value'],
       slug: event.target.slug['value'],
-      description: event.target.description['value'],
+      description: description,
       metaTitle: event.target.metaTitle['value'],
       metaKeyword: event.target.metaKeyword['value'],
       metaDescription: event.target.metaDescription['value'],
@@ -86,6 +91,11 @@ class ArticalEdit extends Component {
     // return false;
     this.props.articalupdate(updateItem);
   }
+
+  handleEditorChange(description, editor) {
+    this.setState({ description });
+  }
+
   render() {
     const { articals  } = this.props;
     const { submitted } = this.state;
@@ -121,7 +131,22 @@ class ArticalEdit extends Component {
                         <Input name="slug" type="text" placeholder="slug" autoComplete="Slug" onChange={this.handleChange} defaultValue={articals.item.slug}/>
                       </InputGroup>
                       <InputGroup className="mb-3">
-                        <Input name="description" type="text" placeholder="description" autoComplete="description" onChange={this.handleChange} defaultValue={articals.item.description}/>
+                      <Editor
+                        initialValue=''
+                        init={{
+                          height: 250,
+                          menubar: true,
+                          plugins: [
+                            'advlist autolink lists link image charmap print preview anchor',
+                            'searchreplace visualblocks code fullscreen',
+                            'insertdatetime media table paste code help wordcount'
+                          ],
+                          toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help'
+                        }}
+                        value={ articals.item.description }
+                        onEditorChange={this.handleEditorChange}
+                      />
+                        {/* <Input name="description" type="text" placeholder="description" autoComplete="description" onChange={this.handleChange} defaultValue={articals.item.description}/> */}
                       </InputGroup>
                       <InputGroup className="mb-3">
                       <Dropzone getUploadParams={getUploadParams}

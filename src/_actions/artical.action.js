@@ -19,7 +19,7 @@ function create(artical) {
 				.then(
 					artical => { 
 							dispatch(success());
-							history.push('/artical');
+							history.push('/admin/artical');
 							dispatch(alertActions.success('Artical added successful'));
 					},
 					error => {
@@ -87,7 +87,7 @@ function update(artical){
         articalService.update(artical).then(
 			(artical) => {
                 dispatch(success(artical));
-                history.push('/artical');
+                history.push('/admin/artical');
             });
     };
 

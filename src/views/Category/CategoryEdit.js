@@ -22,7 +22,7 @@ class CategoryEdit extends Component {
         slug: '',
         order: ''
       },
-      content: '',
+      description: '',
       submitted: false,
       selectedPage: 1
     };
@@ -35,13 +35,13 @@ class CategoryEdit extends Component {
   componentDidMount(){
     const id = this.props.history.location.pathname.split('/')[3];
     this.setState({ submitted: true });
-    const { category, content } = this.state;
+    const { category, description } = this.state;
     this.props.categorygetById(id);
   }
 
   handleChange(event) {
     const { name, value } = event.target;
-    const { category, content } = this.state;
+    const { category, description } = this.state;
     this.setState({
       category: {
             ...category,
@@ -55,6 +55,7 @@ class CategoryEdit extends Component {
     event.preventDefault();
     const { name, value } = event.target;
     const { category, description } = this.state;
+    console.log(description,'descriptiondescriptiondescription');
     const updateItem = {
       _id: event.target._id['value'],
       title: event.target.title['value'],
@@ -103,7 +104,6 @@ class CategoryEdit extends Component {
                     toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help'
                   }}
                   value={ categorys.item.description }
-                  defaultValue={ categorys.item.description }
                   onEditorChange={this.handleEditorChange}
                 />
                   {/* <Input name="description" type="text" placeholder="description" autoComplete="description" onChange={this.handleChange}/> */}

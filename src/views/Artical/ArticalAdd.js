@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import $ from 'min-jquery';
 import 'react-dropzone-uploader/dist/styles.css'
 import Dropzone from 'react-dropzone-uploader'
+import { Editor } from '@tinymce/tinymce-react';
+
 import "./Artical.css";
 
 import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, 
@@ -31,17 +33,18 @@ class ArticalAdd extends Component {
         artical: {
           title: '',
           slug: '',
-          description: '',
           file_name: [],
           metaTitle: '',
           metaKeyword: '',
           order: '',
         },
-          submitted: false
+        description: '',
+        submitted: false
       };
 
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleEditorChange = this.handleEditorChange.bind(this);
   }
 
   handleChange(event) {
@@ -58,7 +61,7 @@ class ArticalAdd extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.setState({ submitted: true });
-    const { artical } = this.state;
+    const { artical, description } = this.state;
     const { name, value } = event.target;
     var igmgg = event.target.file_name;
     // console.log(igmgg,'igmggigmgg');
@@ -78,7 +81,7 @@ class ArticalAdd extends Component {
       title: event.target.title['value'],
       slug: event.target.slug['value'],
       images: new_array,
-      description: event.target.description['value'],
+      description: description,
       metaTitle: event.target.metaTitle['value'],
       metaKeyword: event.target.metaKeyword['value'],
       metaDescription: event.target.metaDescription['value'],
@@ -87,6 +90,12 @@ class ArticalAdd extends Component {
     // return false;
     this.props.articalCreate(addItem);
   }
+
+  handleEditorChange(description, editor) {
+    this.setState({ description });
+  }
+
+
   render() {
     const { artical  } = this.props;
     const { submitted } = this.state;
@@ -113,7 +122,22 @@ class ArticalAdd extends Component {
                       <Input name="slug" type="text" placeholder="slug" autoComplete="Slug" onChange={this.handleChange}/>
                     </InputGroup>
                     <InputGroup className="mb-3">
-                      <Input name="description" type="text" placeholder="description" autoComplete="description" onChange={this.handleChange}/>
+                    <Editor
+                      initialValue=''
+                      init={{
+                        height: 250,
+                        menubar: true,
+                        plugins: [
+                          'advlist autolink lists link image charmap print preview anchor',
+                          'searchreplace visualblocks code fullscreen',
+                          'insertdatetime media table paste code help wordcount'
+                        ],
+                        toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help'
+                      }}
+                      value={this.state.description}
+                      onEditorChange={this.handleEditorChange}
+                    />
+                      {/* <Input name="description" type="text" placeholder="description" autoComplete="description" onChange={this.handleChange}/> */}
                     </InputGroup>
                     <InputGroup className="mb-3">
                     <Dropzone getUploadParams={getUploadParams}
