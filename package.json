@@ -62,7 +62,7 @@
     "redux-thunk": "^2.2.0",
     "simple-line-icons": "^2.4.1",
     "store": "^2.0.12",
-    "validator": "^12.1.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "react-scripts": "^3.0.1",
